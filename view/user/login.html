@@ -12,12 +12,34 @@
         body {
             background-color: #7d2923;
         }
+
+        #popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            display: none;
+            /* ซ่อน Pop-up ไว้ตอนแรก */
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <div class="row justify-content-center">
+<<<<<<< HEAD
+            <div class="custom-container2">
+                <div class="header">
+                    <img src="/public/image/logo-mfu-v22.png" alt="logo-mfu" class="logo">
+                    <h2 style="color: white; text-align: center;">Register for Graduation</h2>
+                </div>
+                <div class="login-container">
+                    <form id="loginForm">
+=======
             <div class="col-md-11">
                 <div class="custom-container2">
                     <div class="header">
@@ -25,10 +47,11 @@
                         <h2 style="color: white; text-align: center;">Register for Graduation</h2>
                     </div>
                     <form>
+>>>>>>> d4e15cc73d6f6e9f8ed57165f1bcb91562a50dfd
                         <h3 style="color: white;" class="mb-3">Log In</h3>
                         <div class="mb-3">
                             <input type="text" class="form-control" placeholder="Student ID" aria-label="StudentID"
-                                required>
+                                id="studentId" required>
                         </div>
                         <div class="mb-3">
                             <input type="password" class="form-control" placeholder="Password" aria-label="Password"
@@ -41,6 +64,10 @@
                             <a href="/view/user/register.html" class="nav-link text-white text-end">Sign in</a>
                         </div>
                     </form>
+                    <div id="popup" class="hidden">
+                        <p>Incorrect Student ID or Password. Please try again or sign up if you are a new user.</p>
+                        <button onclick="closePopup()">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -48,7 +75,35 @@
     </div>
 
     <script>
-        
+        const loginForm = document.getElementById('loginForm');
+        const popup = document.getElementById('popup');
+
+        loginForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // ป้องกันการส่งฟอร์มแบบปกติ
+
+            const studentId = document.getElementById('studentId').value;
+            const password = document.getElementById('password').value;
+
+            // จำลองการเชื่อมต่อกับฐานข้อมูล (แทนที่ด้วยการเชื่อมต่อจริงของคุณ)
+            const database = [
+                { studentId: '12345', password: 'abc123' },
+                { studentId: '67890', password: 'def456' },
+            ];
+
+            const user = database.find(user => user.studentId === studentId && user.password === password);
+
+            if (user) {
+                // Student ID และ Password ถูกต้อง ไปที่หน้า Home
+                window.location.href = home.html;
+            } else {
+                // Student ID หรือ Password ผิด แสดง Pop-up
+                popup.classList.remove('hidden');
+            }
+        });
+
+        function closePopup() {
+            popup.classList.add('hidden');
+        }
     </script>
 </body>
 

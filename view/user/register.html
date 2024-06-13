@@ -17,6 +17,12 @@
 <body>
     <div class="container">
         <div class="row justify-content-center">
+<<<<<<< HEAD
+            <div class="custom-container">
+                <div class="header">
+                    <img src="/public/image/logo-mfu-v22.png" alt="logo-mfu" class="logo">
+                    <h2>Register for Graduation</h2>
+=======
             <div class="col-md-11">
                 <div class="custom-container">
                     <div class="header">
@@ -43,11 +49,31 @@
                             <button type="submit" class="btn btn btn-secondary">Register</button>
                         </div>
                     </form>
+>>>>>>> d4e15cc73d6f6e9f8ed57165f1bcb91562a50dfd
                 </div>
+                <form action="/register" method="POST">
+                    <p>Sign in</p>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="Student ID" name="studentID" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" placeholder="Email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control" placeholder="Password" name="password" id="password"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control" placeholder="Confirm Password" id="confirmPassword"
+                            required>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn btn-secondary">Register</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-
     <script>
         document.querySelector('form').addEventListener('submit', function (e) {
             const password = document.getElementById('password').value;
