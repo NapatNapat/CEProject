@@ -12,7 +12,6 @@
             background-color: #7d2923;
         }
     </style>
-    <script src="/public/css/style.css"></script>
 </head>
 
 <body>
@@ -21,22 +20,22 @@
             <div class="col-md-6">
                 <div class="custom-container">
                     <div class="header">
-                        <img src="/image/logo-mfu-v22.png" alt="logo-mfu" class="logo">
+                        <img src="/public/image/logo-mfu-v22.png" alt="logo-mfu" class="logo">
                         <h2>Register for Graduation</h2>
                     </div>
-                    <form>
+                    <form action="/register" method="POST">
                         <p>Sign in</p>
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Student ID" aria-label="StudentID" required>
+                            <input type="text" class="form-control" placeholder="Student ID" name="studentID" required>
                         </div>
                         <div class="mb-3">
-                            <input type="email" class="form-control" placeholder="Email" aria-label="Email" required>
+                            <input type="email" class="form-control" placeholder="Email" name="email" required>
                         </div>
                         <div class="mb-3">
-                            <input type="password" class="form-control" placeholder="Password" aria-label="Password" id="password" required>
+                            <input type="password" class="form-control" placeholder="Password" name="password" id="password" required>
                         </div>
                         <div class="mb-3">
-                            <input type="password" class="form-control" placeholder="Confirm Password" aria-label="ConfirmPassword" id="confirmPassword" required>
+                            <input type="password" class="form-control" placeholder="Confirm Password" id="confirmPassword" required>
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn btn-secondary">Register</button>
@@ -48,16 +47,13 @@
     </div>
 
     <script>
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault();
+        document.querySelector('form').addEventListener('submit', function (e) {
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
 
             if (password !== confirmPassword) {
+                e.preventDefault();
                 alert('Passwords do not match.');
-            } else {
-                alert('Form submitted successfully.');
-                // You can add code here to handle form submission, e.g., sending data to the server
             }
         });
     </script>
