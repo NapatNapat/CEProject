@@ -10,54 +10,36 @@
     <style>
         body {
             background-color: #7d2923;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .container {
-            color: white;
-            width: 300px;
-            height: 200px;
-            background-color: #7d2923;
-            margin: auto;
-            display: flex;
-        }
-
-        .left {
-            width: 30%;
-            /* กำหนดความกว้างของพื้นที่ซ้าย 30% */
-            
-            /* กำหนดสีพื้นหลัง */
-            padding: 10px;
-        }
-
-        .right {
-            width: 70%;
-            /* กำหนดความกว้างของพื้นที่ขวา 70% */
-           
-            /* กำหนดสีพื้นหลัง */
-            padding: 10px;
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="left">
-            <h2>เนื้อหาซ้าย</h2>
-          </div>
-          <div class="right">
-            <h2>เนื้อหาขวา</h2>
-          </div>
-        <div>
-            <h1>Login</h1>
+        <div class="row justify-content-center">
+            <div class="col-md">
+                <div class="custom-container">
+                    <div class="header">
+                        <img src="/public/image/logo-mfu-v23.png" class="logo" alt="logo-mfu">
+                        <h2 style="color: white;">Register for Graduation</h2>
+                    </div>
+                    <form>
+                        <h3 style="color: white;" class="mb-3">Log In</h3>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Student ID" aria-label="StudentID" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" placeholder="Password" aria-label="Password" id="password" required>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn btn-light">Log in</button>
+                            <a href="/view/user/register.html" class="nav-link text-white text-end">Sign in</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div>
-            <h1>Login</h1>
-        </div>
+    </div>
     </div>
 </body>
 
