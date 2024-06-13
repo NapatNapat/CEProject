@@ -4,6 +4,9 @@
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 50px;
+    max-width: 800px; /* Adjusted max-width for better readability on larger screens */
+    margin: auto; /* Center align on larger screens */
+
 }
 
 .header {
@@ -25,6 +28,32 @@
     .logo {
         width: 20%;
     }
+}
+
+/* Additional Styles for Form Elements */
+input[type=text],
+input[type=email],
+input[type=password] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
 }
 
 .container {
