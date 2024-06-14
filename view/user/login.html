@@ -12,18 +12,6 @@
         body {
             background-color: #7d2923;
         }
-
-        #errorPopup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #f00;
-            color: #fff;
-            padding: 20px;
-            border: 1px solid #ccc;
-            display: none;
-        }
     </style>
 </head>
 
@@ -53,10 +41,7 @@
                             <a href="/view/user/register.html" class="nav-link text-white text-end">Sign in</a>
                         </div>
                     </form>
-                    <div id="errorPopup" class="hidden">
-                        <p>Incorrect student ID or password. Please try again.</p>
-                        <button onclick="closeErrorPopup()">Close</button>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -64,28 +49,7 @@
     </div>
 
     <script>
-        const loginForm = document.getElementById('loginForm');
-        const errorPopup = document.getElementById('errorPopup');
 
-        loginForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-
-            const studentId = document.getElementById('studentId').value;
-            const password = document.getElementById('password').value;
-
-            // Simulating login validation (replace with actual validation logic)
-            if (studentId === 'validStudent' && password === 'validPassword') {
-                // Login successful, redirect to home page
-                window.location.href = 'home.html';
-            } else {
-                // Login failed, show error popup
-                errorPopup.style.display = 'block';
-            }
-        });
-
-        function closeErrorPopup() {
-            errorPopup.style.display = 'none';
-        }
     </script>
 </body>
 
