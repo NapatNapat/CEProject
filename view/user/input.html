@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>กรอกข้อมูลนักศึกษา</title>
+    <title>Input The Student information</title>
     <link rel="stylesheet" href="/public/css/bootstrap.min.css">
     <script src="/public/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="/public/css/home.css">
@@ -51,7 +51,7 @@
         label {
             display: block;
             margin-bottom: 5px;
-            border: 2%;
+            border-radius: 5px;
         }
 
         input[type="text"],
@@ -103,30 +103,81 @@
                     <h2>Personal information</h2>
                     <label for="name">Student ID:</label>
                     <input type="text" id="studentID" name="StudentID" required>
+
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" required>
+
                     <label for="surname">Surname:</label>
                     <input type="text" id="surname" name="surname" required>
+
                     <label for="name">Phone-number:</label>
                     <input type="text" id="phoneNum" name="phoneNum" required>
+
                     <label for="name">MFU-Email:</label>
                     <input type="text" id="mfu-Email" name="mfu-Email" required>
+
                     <label for="school">School:</label>
                     <select id="school" name="school" required>
                         <option value="male">IT</option>
                         <option value="female">BA</option>
                     </select>
+
                     <label for="major">Major:</label>
                     <select id="major" name="major" required>
                         <option value="male">CE</option>
                         <option value="female">SE</option>
                     </select>
+
                     <label for="degree">Degree:</label>
                     <select id="degree" name="degree" required>
                         <option value="male">A</option>
                         <option value="female">B</option>
                     </select>
                 </section>
+
                 <section id="add-pic">
                     <h2>Add your Picture</h2>
-                    </select>
+                </section>
+                <div>
+                    <p>csdks</p>
+                    <input type="file" id="fileInput" accept="image/*">
+                    <div class="preview">
+                        <img id="previewImage" src="#" alt="Image Preview" style="display:none;">
+                    </div>
+                </div>
+
+                <input type="file" id="fileInput" accept="image/*">
+                <div class="preview">
+                    <img id="previewImage" src="#" alt="Image Preview" style="display:none;">
+                </div>
+                <input type="file" id="fileInput" accept="image/*">
+                <div class="preview">
+                    <img id="previewImage" src="#" alt="Image Preview" style="display:none;">
+                </div>
+        </div>
+
+
+        <script>
+            const fileInput = document.getElementById('fileInput');
+            const previewImage = document.getElementById('previewImage');
+
+            fileInput.addEventListener('change', function (event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        previewImage.src = e.target.result;
+                        previewImage.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    previewImage.style.display = 'none';
+                    previewImage.src = '#';
+                }
+            });
+        </script>
+
+
+</body>
+
+</html>
