@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>กรอกข้อมูลนักศึกษา</title>
+    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
+    <script src="/public/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/public/css/home.css">
+    <style>
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        nav {
+            background-color: #fff;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="email"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #f0f0f0;
+            padding: 20px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="d-flex align-items-center">
+            <img src="/public/image/logo-mfu-v22.png" alt="logo-mfu" class="logo">
+            <div class="university-name ms-3">
+                <h1 id="univ-name-en">MAE FAH LUANG UNIVERSITY</h1>
+                <h2 id="univ-name-th">มหาวิทยาลัยแม่ฟ้าหลวง</h2>
+            </div>
+        </div>
+        <div class="language-switch">
+            <a id="en-link">EN</a> | <a id="th-link">TH</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <form action="submit.php" method="post">
+                <section id="personal-info">
+                    <h2>Personal information</h2>
+                    <label for="name">Student ID:</label>
+                    <input type="text" id="studentID" name="StudentID" required>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="surname">Surname:</label>
+                    <input type="text" id="surname" name="surname" required>
+                    <label for="name">Phone-number:</label>
+                    <input type="text" id="phoneNum" name="phoneNum" required>
+                    <label for="gender">Gender:</label>
+                    <select id="gender" name="gender" required>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                    <label for="birthday">วันเกิด:</label>
+                    <input type="date" id="birthday" name="birthday" required>
+                    <label for="address">ที่อยู่:</label>
+                    <textarea id="address" name="address" rows="5" required></textarea>
+                </section>
+                <section id="education-info">
+                    <h2>ข้อมูลการศึกษา</h2>
+                    <label for="education-level">ระดับการศึกษา:</label>
+                    <select id="education-level" name="education-level" required>
+                        <option value="high-school">มัธยมปลาย</option>
+                        <option value="bachelor's-degree">ปริญญาตรี</option>
+                        <option value="master's-degree">ปริญญาโท</option>
+                        <option value="doctoral-degree">ปริญญาเอก</option>
+                    </select>
+                    <label for="school">โรงเรียนที่จบมา:</label>
+                    <input type="text" id="school" name="school" required>
+                    <label for="gpa">คะแนนเฉลี่ย:</label>
+                    <input type="number" id="gpa" name="gpa" required>
+                </section>
+                <section id="other-info">
+                    <h2>ข้อมูลอื่นๆ</h2>
+                    <label for="phone-number">เบอร์โทรศัพท์:</label>
+                    <input type="tel" id="phone-number" name="phone-number" required>
+                    <label for="email">อีเมล:</label>
+                    <input type="email" id="email" name="email" required>
+                    <label
