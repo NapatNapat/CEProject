@@ -24,7 +24,7 @@
                         <img src="/public/image/logo-mfu-v22.png" alt="logo-mfu" class="logo">
                         <h2 style="color: white; text-align: center;">Register for Graduation</h2>
                     </div>
-                    <form>
+                    <form id="loginForm" onsubmit="checkLogin(event)">
                         <h3 style="color: white;" class="mb-3">Log In</h3>
                         <div class="mb-3">
                             <input type="text" class="form-control" placeholder="Student ID" aria-label="StudentID"
@@ -35,41 +35,37 @@
                                 id="password" required>
                         </div>
                         <div>
-                            <button onclick="checkLogin()">Login</button>        
+                            <button type="submit" class="btn btn-success">Login</button>
                             <div class="mt-3 text-end">
-                                <a href="register.html"><button2 class="btn btn-secondary">Sign in</button></a>
+                                <a href="register.html" class="btn btn-secondary">Sign up</a>
                             </div>
+                        </div>
                     </form>
                 </div>
-
-
             </div>
         </div>
     </div>
-    </div>
-    </div>
 
     <script>
-
         const registeredUsers = [
             { studentId: '12345', password: 'password123' },
             { studentId: '67890', password: 'password456' }
         ];
 
-        function checkLogin() {
+        function checkLogin(event) {
+            event.preventDefault(); // Prevent form from submitting
+
             const studentId = document.getElementById('studentId').value;
             const password = document.getElementById('password').value;
 
             const user = registeredUsers.find(user => user.studentId === studentId);
 
             if (user && user.password === password) {
-                window.location.href = 'home.html'; // เปลี่ยน URL เป็นหน้าถัดไป
-                //alert('Login successful!');
-                // Redirect to another page or perform any other action
+                window.location.href = 'home.html'; // Redirect to home.html
             } else if (user && user.password !== password) {
                 showPopup('Incorrect password. Please try again.');
             } else {
-                showPopup('Student ID not found. Please sign in first.');
+                showPopup('Student ID not found. Please sign up first.');
             }
         }
 
