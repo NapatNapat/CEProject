@@ -161,6 +161,54 @@
       background-color: #0056b3;
       /* Darker blue on hover */
     }
+
+    /* Address form styling */
+    .address-form {
+      margin-top: 20px;
+      padding: 20px;
+      border-top: 1px solid #ddd;
+      text-align: left;
+    }
+
+    .address-form h2 {
+      font-size: 22px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .address-form label {
+      display: block;
+      font-size: 16px;
+      color: #333;
+      margin: 10px 0;
+    }
+
+    .address-form input[type="text"] {
+      width: calc(100% - 22px);
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .address-form input[type="radio"] {
+      margin-right: 10px;
+    }
+
+    .address-form button[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .address-form button[type="submit"]:hover {
+      background-color: #45a049;
+    }
   </style>
 </head>
 
@@ -178,6 +226,25 @@
       <button class="button cancel" id="cancelButton">ไม่เข้าร่วม</button>
     </div>
     <a href="home.html" class="back-button">Back to Home</a>
+
+    <div class="address-form" id="addressForm" style="display: none;">
+      <h2>กรุณาเลือกวิธีรับใบรับปริญญา</h2>
+      <label>
+        <input type="radio" name="deliveryOption" value="delivery" id="deliveryOption"> จัดส่งถึงที่อยู่
+      </label>
+      <label>
+        <input type="radio" name="deliveryOption" value="pickup" id="pickupOption"> มารับด้วยตนเอง
+      </label>
+      <div id="addressFields" style="display: none;">
+        <label for="address">ที่อยู่:</label>
+        <input type="text" id="address" name="address">
+        <label for="city">เมือง:</label>
+        <input type="text" id="city" name="city">
+        <label for="zip">รหัสไปรษณีย์:</label>
+        <input type="text" id="zip" name="zip">
+      </div>
+      <button type="submit" id="submitAddressButton">ยืนยัน</button>
+    </div>
   </div>
 
   <!-- Custom Popup -->
@@ -252,12 +319,27 @@
 
     document.getElementById("cancelYesButton").addEventListener("click", function () {
       document.getElementById("cancelConfirmationPopup").style.display = "none";
-      alert("คุณได้ยกเลิกการเข้าร่วมแล้ว!");
-      window.location.href = "home.html"; // Redirect to home page
+      document.getElementById("addressForm").style.display = "block";
     });
 
     document.getElementById("cancelNoButton").addEventListener("click", function () {
       document.getElementById("cancelConfirmationPopup").style.display = "none";
+    });
+
+    document.getElementById("deliveryOption").addEventListener("change", function () {
+      document.getElementById("addressFields").style.display = "block";
+    });
+
+    document.getElementById("pickupOption").addEventListener("change", function () {
+      document.getElementById("addressFields").style.display = "none";
+    });
+    
+    document.getElementById("submitAddressButton").addEventListener("click", function () {
+      // Simulate saving data (could be an AJAX call to a server)
+      alert("บันทึกข้อมูลเรียบร้อยแล้ว");
+
+      // Redirect to home.html
+      window.location.href = "home.html";
     });
   </script>
 </body>
