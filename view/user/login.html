@@ -60,7 +60,7 @@
             const user = registeredUsers.find(user => user.studentId === studentId);
 
             if (user && user.password === password) {
-                window.location.href = "home.html";
+                window.location.href = 'home.html'; // เปลี่ยน URL เป็นหน้าถัดไป
                 //alert('Login successful!');
                 // Redirect to another page or perform any other action
             } else if (user && user.password !== password) {
