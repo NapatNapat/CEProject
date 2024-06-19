@@ -60,7 +60,8 @@
             const user = registeredUsers.find(user => user.studentId === studentId);
 
             if (user && user.password === password) {
-                alert('Login successful!');
+                window.location.href = "home.html";
+                //alert('Login successful!');
                 // Redirect to another page or perform any other action
             } else if (user && user.password !== password) {
                 showPopup('Incorrect password. Please try again.');
