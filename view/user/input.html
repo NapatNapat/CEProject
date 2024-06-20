@@ -116,46 +116,54 @@
                     <label for="name">MFU-Email:</label>
                     <input type="text" id="mfu-Email" name="mfu-Email" required>
 
-                    <label for="school">School:</label>
-                    <select id="school" name="school" required>
-                        <option value="male">IT</option>
-                        <option value="female">BA</option>
+                    <label for="degree">Degree</label>
+                    <select id="degree" onchange="filterDropdown2()">
+                        <option value="">Select an option</option>
+                        <option value="bachelor">Bachelor’s Degree</option>
+                        <option value="master">Master’s Degree</option>
+                        <option value="doctoral">Doctoral Degree</option>
+                        <option value="certificate">Certificate</option>
                     </select>
 
-                    <label for="major">Major:</label>
-                    <select id="major" name="major" required>
-                        <option value="male">CE</option>
-                        <option value="female">SE</option>
+                    <label for="school">School</label>
+                    <select id="school" onchange="filterDropdown3()">
+                        <option value="">Select an option</option>
+                        <!-- Options will be populated dynamically -->
                     </select>
 
-                    <label for="degree">Degree:</label>
-                    <select id="degree" name="degree" required>
-                        <option value="male">A</option>
-                        <option value="female">B</option>
+                    <label for="major">Major</label>
+                    <select id="major">
+                        <option value="">Select an option</option>
+                        <!-- Options will be populated dynamically -->
                     </select>
                 </section>
 
                 <section id="add-pic">
                     <h2>Add your Picture</h2>
                 </section>
-                <div>
-                    <p>csdks</p>
+                <div class="mt-3">
+                    <p>Picture 1</p>
+                    <input type="file" id="fileInput" accept="image/*">
+                    <div class="preview">
+                        <img id="previewImage" src="#" alt="Image Preview" style="display:none;">
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <p>Picture 2</p>
+                    <input type="file" id="fileInput" accept="image/*">
+                    <div class="preview">
+                        <img id="previewImage" src="#" alt="Image Preview" style="display:none;">
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <p>Picture 3</p>
                     <input type="file" id="fileInput" accept="image/*">
                     <div class="preview">
                         <img id="previewImage" src="#" alt="Image Preview" style="display:none;">
                     </div>
                 </div>
 
-                <input type="file" id="fileInput" accept="image/*">
-                <div class="preview">
-                    <img id="previewImage" src="#" alt="Image Preview" style="display:none;">
-                </div>
-                <input type="file" id="fileInput" accept="image/*">
-                <div class="preview">
-                    <img id="previewImage" src="#" alt="Image Preview" style="display:none;">
-                </div>
         </div>
-
 
         <script>
             const fileInput = document.getElementById('fileInput');
@@ -175,9 +183,88 @@
                     previewImage.src = '#';
                 }
             });
+
+            const dropdown2Data = {
+                bachelor: ["School of Agro-Industry", "School of Cosmetic Science", "School of Dentistry", "School of Health Science", "School of Information Technology",
+                    "School of Integrative Medicine", "School of Law", "School of Liberal Arts", "School of Management", "School of Medicine", "School of Science", "School of Social Innovation"],
+
+                master: ["School of Agro-Industry", "School of Anti-Aging and Regenerative Medicine", "School of Cosmetic Science", "School of Health Science", "School of Information Technology",
+                    "School of Law", "School of Liberal Arts", "School of Management", "School of Science", "School of Sinology", "School of Social Innovation"],
+
+                doctoral: ["School of Agro-Industry", "School of Anti-Aging and Regenerative Medicine", "School of Cosmetic Science", "School of Health Science", "School of Information Technology",
+                    "School of Liberal Arts", "School of Management", "School of Science"],
+
+                certificate: ["School of Dentistry", "School of Nursing"],
+
+                all: ["School of Agro-Industry", "School of Anti-Aging and Regenerative Medicine", "School of Cosmetic Science", "School of Dentistry", "School of Health Science", "School of Information Technology",
+                    "School of Integrative Medicine", "School of Law", "School of Liberal Arts", "School of Management", "School of Medicine", "School of Nursing", "School of Science", "School of Sinology", "School of Social Innovation"]
+            };
+
+            const dropdown3Data = {
+                "School of Agro-Industry": ["Innovative Food Science and Technology", "Postharvest Technology and Logistics", "Dual Bachelor's Degree Programmes", "Postharvest Technology and Innovation", "Innovative Food Science and Technology"],
+                "School of Anti-Aging and Regenerative Medicine": ["Anti-Aging and Regenerative Medicine", "Anti-Aging and Regenerative Science", "Dermatology"],
+                "School of Cosmetic Science": ["Beauty Technology", "Cosmetic Science", "Creative Innovation in Cosmetic Science"],
+                "School of Dentistry": ["Dental Assistant", "Dental Surgery"],
+                "School of Health Science": ["Environmental Health", "Occupational Health and Safety", "Public Health", "Sports and Health Science", "Border Health Management", "Health and Biomedical Analytics"],
+                "School of Information Technology": ["Computer Engineering", "Digital and Communication Engineering", "Digital Technology for Business Innovation", "Multimedia Technology and Animation", "Software Engineering", "Computer Science and Innovation", "Digital Transformation Technology"],
+                "School of Integrative Medicine": ["Applied Thai Traditional Medicine", "Physical Therapy", "Traditional Chinese Medicine"],
+                "School of Law": ["Laws", "Business Law and Chinese Communication"],
+                "School of Liberal Arts": ["English", "Thai Language and Culture for Foreigners", "English for Professional Development"],
+                "School of Management": ["Accounting", "Business Management", "Economics", "Business Administration", "International Logistics and Supply Chain Management"],
+                "School of Medicine": ["Medicine"],
+                "School of Nursing": ["Practical Nursing", "Nursing Science"],
+                "School of Science": ["Applied Chemistry", "Biotechnology (Biological Science)", "Materials Engineering", "Biological Science", "Computational and Data Science", "Materials Innovation for Sustainability"],
+                "School of Sinology": ["Business Chinese", "Chinese Language and Culture", "Chinese Studies", "Teaching Chinese Language"],
+                "School of Social Innovation": ["International Development"],
+
+                all: ["Innovative Food Science and Technology", "Postharvest Technology and Logistics", "Dual Bachelor's Degree Programmes", "Postharvest Technology and Innovation",
+                    "Anti-Aging and Regenerative Medicine", "Anti-Aging and Regenerative Science", "Dermatology",
+                    "Beauty Technology", "Cosmetic Science", "Creative Innovation in Cosmetic Science", "Dental Assistant",
+                    "Environmental Health", "Occupational Health and Safety", "Public Health", "Sports and Health Science", "Border Health Management", "Health and Biomedical Analytics",
+                    "Computer Engineering", "Digital and Communication Engineering", "Digital Technology for Business Innovation", "Multimedia Technology and Animation", "Software Engineering", "Computer Science and Innovation", "Digital Transformation Technology",
+                    "Applied Thai Traditional Medicine", "Physical Therapy", "Traditional Chinese Medicine", "Laws", "Business Law and Chinese Communication", "English", "Thai Language and Culture for Foreigners", "English for Professional Development",
+                    "Accounting", "Business Management", "Economics", "Business Administration", "International Logistics and Supply Chain Management", "Medicine", "Practical Nursing", "Nursing Science",
+                    "Applied Chemistry", "Biotechnology (Biological Science)", "Materials Engineering", "Biological Science", "Computational and Data Science", "Materials Innovation for Sustainability",
+                    "Business Chinese", "Chinese Language and Culture", "Chinese Studies", "Teaching Chinese Language", "International Development"]
+            };
+
+            function filterDropdown2() {
+                const degree = document.getElementById('degree');
+                const school = document.getElementById('school');
+                const selectedValue = degree.value;
+
+                school.innerHTML = '<option value="">Select an option</option>';
+                const options = selectedValue ? dropdown2Data[selectedValue] : dropdown2Data['all'];
+                options.forEach(option => {
+                    const newOption = document.createElement('option');
+                    newOption.value = option;
+                    newOption.textContent = option;
+                    school.appendChild(newOption);
+                });
+
+                // Reset dropdown3
+                filterDropdown3();
+            }
+
+            function filterDropdown3() {
+                const school = document.getElementById('school');
+                const major = document.getElementById('major');
+                const selectedValue = school.value;
+
+                major.innerHTML = '<option value="">Select an option</option>';
+                const options = selectedValue ? dropdown3Data[selectedValue] : dropdown3Data['all'];
+                options.forEach(option => {
+                    const newOption = document.createElement('option');
+                    newOption.value = option;
+                    newOption.textContent = option;
+                    major.appendChild(newOption);
+                });
+            }
+
+            // Initialize dropdowns with default data
+            filterDropdown2();
+            filterDropdown3();
         </script>
-
-
 </body>
 
 </html>
