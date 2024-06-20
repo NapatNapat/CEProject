@@ -139,7 +139,8 @@
       padding: 20px;
       border-top: 1px solid #ddd;
       text-align: left;
-      display: none; /* Initially hidden */
+      display: none;
+      /* Initially hidden */
     }
 
     .address-form h2 {
@@ -168,7 +169,7 @@
       margin-right: 10px;
     }
 
-    .address-form button[type="submit"] {
+    .address-form button[type="button"] {
       background-color: #4CAF50;
       color: white;
       padding: 10px 20px;
@@ -179,7 +180,7 @@
       transition: background-color 0.3s;
     }
 
-    .address-form button[type="submit"]:hover {
+    .address-form button[type="button"]:hover {
       background-color: #45a049;
     }
   </style>
@@ -198,7 +199,7 @@
       <button class="button confirm" id="confirmButton">เข้าร่วม</button>
       <button class="button cancel" id="cancelButton">ไม่เข้าร่วม</button>
     </div>
-    <a href="home.html" class="back-button">Back to Home</a>
+    <a href="home.html" class="back-button">กลับไปที่หน้าหลัก</a>
 
     <div class="address-form" id="addressForm">
       <h2>กรุณาเลือกวิธีรับใบรับปริญญา</h2>
@@ -209,96 +210,134 @@
         <input type="radio" name="deliveryOption" value="pickup" id="pickupOption"> มารับด้วยตนเอง
       </label>
       <div id="addressFields" style="display: none;">
-        <label for="address">ที่อยู่:</label>
-        <input type="text" id="address" name="address">
-        <label for="city">จังหวัด/เมือง:</label>
-        <input type="text" id="city" name="city">
-        <label for="zip">รหัสไปรษณีย์:</label>
-        <input type="text" id="zip" name="zip">
+        <label for="address" id="addressLabel">ที่อยู่:</label>
+        <input type="text" id="addressInput" name="address">
+        <label for="city" id="cityLabel">จังหวัด/เมือง:</label>
+        <input type="text" id="cityInput" name="city">
+        <label for="zip" id="zipLabel">รหัสไปรษณีย์:</label>
+        <input type="text" id="zipInput" name="zip">
       </div>
-      <button type="submit" id="submitAddressButton">ยืนยัน</button>
+      <button type="button" id="submitAddressButton">ยืนยัน</button>
     </div>
-  </div>
 
-  <script>
-    // Function to create popup dialog
-    function createPopupDialog(message, confirmCallback) {
-      var popup = document.createElement("div");
-      popup.className = "popup";
-      var popupContent = document.createElement("div");
-      popupContent.className = "popup-content";
+    <script>
+      // Function to create popup dialog
+      function createPopupDialog(message, confirmCallback) {
+        var popup = document.createElement("div");
+        popup.className = "popup";
+        var popupContent = document.createElement("div");
+        popupContent.className = "popup-content";
 
-      var messageElement = document.createElement("p");
-      messageElement.textContent = message;
-      popupContent.appendChild(messageElement);
+        var messageElement = document.createElement("p");
+        messageElement.textContent = message;
+        popupContent.appendChild(messageElement);
 
-      var confirmButton = document.createElement("button");
-      confirmButton.textContent = "ใช่";
-      confirmButton.className = "button confirm";
-      confirmButton.style.marginRight = "10px";
-      confirmButton.addEventListener("click", function () {
-        document.body.removeChild(popup);
-        if (confirmCallback) {
-          confirmCallback();
-        }
-      });
-      popupContent.appendChild(confirmButton);
+        var confirmButton = document.createElement("button");
+        confirmButton.textContent = "ใช่";
+        confirmButton.className = "button confirm";
+        confirmButton.style.marginRight = "10px";
+        confirmButton.addEventListener("click", function () {
+          document.body.removeChild(popup);
+          if (confirmCallback) {
+            confirmCallback();
+          }
+        });
+        popupContent.appendChild(confirmButton);
 
-      var cancelButton = document.createElement("button");
-      cancelButton.textContent = "ไม่";
-      cancelButton.className = "button cancel";
-      cancelButton.addEventListener("click", function () {
-        document.body.removeChild(popup);
-      });
-      popupContent.appendChild(cancelButton);
+        var cancelButton = document.createElement("button");
+        cancelButton.textContent = "ไม่";
+        cancelButton.className = "button cancel";
+        cancelButton.addEventListener("click", function () {
+          document.body.removeChild(popup);
+        });
+        popupContent.appendChild(cancelButton);
 
-      popup.appendChild(popupContent);
-      document.body.appendChild(popup);
-    }
-
-    // Event listeners
-    document.getElementById("confirmButton").addEventListener("click", function () {
-      createPopupDialog("คุณแน่ใจหรือไม่ที่จะยืนยันการเข้าร่วม?", function () {
-        alert("คุณได้ทำการยืนยันแล้ว!");
-        window.location.href = "home.html";
-      });
-    });
-
-    document.getElementById("cancelButton").addEventListener("click", function () {
-      createPopupDialog("คุณแน่ใจว่าต้องการยกเลิกการเข้าร่วม?", function () {
-        document.getElementById("addressForm").style.display = "block";
-      });
-    });
-
-    document.getElementById("deliveryOption").addEventListener("change", function () {
-      var addressFields = document.getElementById("addressFields");
-      addressFields.style.display = this.checked ? "block" : "none";
-    });
-
-    document.getElementById("submitAddressButton").addEventListener("click", function (event) {
-      event.preventDefault(); // Prevent form submission
-
-      var deliveryOption = document.querySelector('input[name="deliveryOption"]:checked');
-      if (!deliveryOption) {
-        alert("กรุณาเลือกวิธีรับใบรับปริญญา");
-        return;
+        popup.appendChild(popupContent);
+        document.body.appendChild(popup);
       }
 
-      if (deliveryOption.value === "delivery") {
-        var address = document.getElementById("address").value.trim();
-        var city = document.getElementById("city").value.trim();
-        var zip = document.getElementById("zip").value.trim();
+      // Event listeners
+      document.getElementById("confirmButton").addEventListener("click", function () {
+        createPopupDialog("คุณแน่ใจหรือไม่ที่จะยืนยันการเข้าร่วมงาน?", function () {
+          alert("คุณได้ทำการยืนยันแล้ว!");
+          window.location.href = "home.html";
+        });
+      });
 
-        if (address === "" || city === "" || zip === "") {
-          alert("กรุณากรอกข้อมูลที่อยู่ให้ครบถ้วน");
+      document.getElementById("cancelButton").addEventListener("click", function () {
+        createPopupDialog("คุณแน่ใจว่าต้องการยกเลิกการเข้าร่วมงาน?", function () {
+          document.getElementById("addressForm").style.display = "block";
+        });
+      });
+
+      // document.getElementById("deliveryOption").addEventListener("change", function () {
+      //   var addressFields = document.getElementById("addressFields");
+      //   addressFields.style.display = this.checked ? "block" : "none";
+      // });
+
+      // document.getElementById("submitAddressButton").addEventListener("click", function () {
+      //   var deliveryOption = document.querySelector('input[name="deliveryOption"]:checked');
+      //   if (!deliveryOption) {
+      //     alert("กรุณาเลือกวิธีรับใบรับปริญญา");
+      //     return;
+      //   }
+
+      //   if (deliveryOption.value === "delivery") {
+      //     var address = document.getElementById("addressInput").value.trim();
+      //     var city = document.getElementById("cityInput").value.trim();
+      //     var zip = document.getElementById("zipInput").value.trim();
+
+      //     if (address === "" || city === "" || zip === "") {
+      //       alert("กรุณากรอกข้อมูลที่อยู่ให้ครบถ้วน");
+      //       return;
+      //     }
+      //   }
+
+      //   alert("บันทึกข้อมูลเรียบร้อยแล้ว");
+      //   window.location.href = "home.html";
+      // });
+
+      
+      // Event listener for radio button change
+      document.querySelectorAll('input[type="radio"][name="deliveryOption"]').forEach(function (radio) {
+        radio.addEventListener('change', function () {
+          if (this.value === "delivery") {
+            document.getElementById("addressFields").style.display = "block";
+            document.getElementById("addressLabel").style.display = "block";
+            document.getElementById("cityLabel").style.display = "block";
+            document.getElementById("zipLabel").style.display = "block";
+          } else {
+            document.getElementById("addressFields").style.display = "none";
+            document.getElementById("addressLabel").style.display = "none";
+            document.getElementById("cityLabel").style.display = "none";
+            document.getElementById("zipLabel").style.display = "none";
+          }
+        });
+      });
+
+      // Event listener for submit button
+      document.getElementById("submitAddressButton").addEventListener("click", function () {
+        var deliveryOption = document.querySelector('input[name="deliveryOption"]:checked');
+        if (!deliveryOption) {
+          alert("กรุณาเลือกวิธีรับใบรับปริญญา");
           return;
         }
-      }
 
-      alert("บันทึกข้อมูลเรียบร้อยแล้ว");
-      window.location.href = "home.html";
-    });
-  </script>
+        if (deliveryOption.value === "delivery") {
+          var address = document.getElementById("addressInput").value.trim();
+          var city = document.getElementById("cityInput").value.trim();
+          var zip = document.getElementById("zipInput").value.trim();
+
+          if (address === "" || city === "" || zip === "") {
+            alert("กรุณากรอกข้อมูลที่อยู่ให้ครบถ้วน");
+            return;
+          }
+        }
+
+        alert("บันทึกข้อมูลเรียบร้อยแล้ว");
+        window.location.href = "home.html";
+      });
+    </script>
 </body>
 
 </html>
