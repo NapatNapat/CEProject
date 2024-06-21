@@ -51,7 +51,20 @@
         label {
             display: block;
             margin-bottom: 5px;
-            border-radius: 5px;
+        }
+
+        .rounded-input {
+            border: 2px solid #ccc;
+            border-radius: 15px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .rounded-select {
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            padding: 10px;
+            font-size: 16px;
         }
 
         input[type="text"],
@@ -102,22 +115,22 @@
                 <section id="personal-info">
                     <h2>Personal information</h2>
                     <label for="name">Student ID:</label>
-                    <input type="text" id="studentID" name="StudentID" required>
+                    <input class="rounded-input" type="text" id="studentID" name="StudentID" required>
 
                     <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
+                    <input class="rounded-input" type="text" id="name" name="name" required>
 
                     <label for="surname">Surname:</label>
-                    <input type="text" id="surname" name="surname" required>
+                    <input class="rounded-input" type="text" id="surname" name="surname" required>
 
                     <label for="name">Phone-number:</label>
-                    <input type="text" id="phoneNum" name="phoneNum" required>
+                    <input class="rounded-input" type="text" id="phoneNum" name="phoneNum" required>
 
                     <label for="name">MFU-Email:</label>
-                    <input type="text" id="mfu-Email" name="mfu-Email" required>
+                    <input class="rounded-input" type="text" id="mfu-Email" name="mfu-Email" required>
 
-                    <label for="degree">Degree</label>
-                    <select id="degree" onchange="filterDropdown2()">
+                    <label for="degree">Degree:</label>
+                    <select class="rounded-select" id="degree" onchange="filterDropdown2()">
                         <option value="">Select an option</option>
                         <option value="bachelor">Bachelor’s Degree</option>
                         <option value="master">Master’s Degree</option>
@@ -125,14 +138,14 @@
                         <option value="certificate">Certificate</option>
                     </select>
 
-                    <label for="school">School</label>
-                    <select id="school" onchange="filterDropdown3()">
+                    <label for="school">School:</label>
+                    <select class="rounded-select" id="school" onchange="filterDropdown3()">
                         <option value="">Select an option</option>
                         <!-- Options will be populated dynamically -->
                     </select>
 
-                    <label for="major">Major</label>
-                    <select id="major">
+                    <label for="major">Major:</label>
+                    <select class="rounded-select" id="major">
                         <option value="">Select an option</option>
                         <!-- Options will be populated dynamically -->
                     </select>

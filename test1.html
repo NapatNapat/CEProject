@@ -3,55 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script>
-        function updateSecondDropDown() {
-            var firstDropDown = document.getElementById("firstDropdown");
-            var secondDropDown = document.getElementById("secondDropdown");
-
-            var selectedOption = firstDropDown.value;
-
-            // Clear the second dropdown
-            secondDropDown.innerHTML = "";
-
-            // Add options to the second dropdown based on the first dropdown selection
-            if (selectedOption === "") {
-                addOption(secondDropDown, "Option A1");
-                addOption(secondDropDown, "Option B1");
-                addOption(secondDropDown, "Option A2");
-                addOption(secondDropDown, "Option B2");
-            } else if (selectedOption === "A") {
-                addOption(secondDropDown, "Option A1");
-                addOption(secondDropDown, "Option A2");
-            } else if (selectedOption === "B") {
-                addOption(secondDropDown, "Option B1");
-                addOption(secondDropDown, "Option B2");
-            }
+    <title>Rounded Label Example</title>
+    <style>
+        .rounded-label {
+            display: inline-block;
+            padding: 10px 20px;
+            border: 2px solid #000; /* สีของเส้นกรอบ */
+            border-radius: 15px; /* ขนาดความโค้งมนของมุม */
+            background-color: #f0f0f0; /* สีพื้นหลัง */
+            font-size: 16px; /* ขนาดตัวอักษร */
         }
-
-        function addOption(dropdown, optionText) {
-            var option = document.createElement("option");
-            option.text = optionText;
-            dropdown.add(option);
-        }
-    </script>
+    </style>
 </head>
 <body>
-    <label for="firstDropdown">Select First Option:</label>
-    <select id="firstDropdown" onchange="updateSecondDropDown()">
-        <option value="">All</option>
-        <option value="A">Option A</option>
-        <option value="B">Option B</option>
-    </select>
-
-    <label for="secondDropdown">Select Second Option:</label>
-    <select id="secondDropdown">
-        <!-- Options will be populated by JavaScript -->
-    </select>
-
-    <script>
-        // Initialize the second dropdown on page load
-        updateSecondDropDown();
-    </script>
+    <label class="rounded-label">This is a rounded label</label>
 </body>
 </html>
