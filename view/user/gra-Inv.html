@@ -6,9 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Graduation Invitation</title>
   <style>
-    /* General styling */
     body {
-      font-family: sans-serif;
+      font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
       background-color: #f4f4f4;
@@ -18,10 +17,9 @@
       height: 100vh;
     }
 
-    /* Container for the main content */
     .container {
-      width: 80%;
-      margin: 0 auto;
+      width: 90%;
+      max-width: 600px;
       padding: 20px;
       background-color: #fff;
       border-radius: 10px;
@@ -29,9 +27,7 @@
       text-align: center;
     }
 
-    /* Header */
     .header {
-      text-align: center;
       margin-bottom: 20px;
     }
 
@@ -40,13 +36,11 @@
       color: #333;
     }
 
-    /* Question */
     .question {
       font-size: 18px;
       color: #666;
     }
 
-    /* Buttons */
     .buttons {
       display: flex;
       justify-content: center;
@@ -54,8 +48,6 @@
     }
 
     .button {
-      background-color: #4CAF50;
-      /* Green */
       border: none;
       color: white;
       padding: 15px 32px;
@@ -66,45 +58,25 @@
       margin: 0 10px;
       cursor: pointer;
       border-radius: 5px;
+      transition: background-color 0.3s;
     }
 
-    .button:hover {
-      background-color: #45a049;
-      /* Darker green on hover */
+    .button.confirm {
+      background-color: #4CAF50;
+    }
+
+    .button.confirm:hover {
+      background-color: #8dff91;
     }
 
     .button.cancel {
       background-color: #dc3545;
-      /* Red */
     }
 
     .button.cancel:hover {
-      background-color: #c82333;
-      /* Darker red on hover */
+      background-color: #ff8495;
     }
 
-    /* Confirmation button */
-    .confirm-button {
-      background-color: #007bff;
-      /* Blue */
-      border: none;
-      color: white;
-      padding: 15px 32px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin-top: 20px;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-
-    .confirm-button:hover {
-      background-color: #0056b3;
-      /* Darker blue on hover */
-    }
-
-    /* Back button */
     .back-button {
       background-color: #333;
       color: white;
@@ -116,26 +88,32 @@
       margin-top: 20px;
       text-decoration: none;
       display: inline-block;
+      transition: background-color 0.3s;
     }
 
     .back-button:hover {
       background-color: #555;
     }
 
-    /* Custom Popup */
     .popup {
       position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .popup-content {
       background-color: white;
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-      z-index: 1000;
       text-align: center;
-      display: none;
-      /* Initially hidden */
     }
 
     .popup p {
@@ -143,31 +121,26 @@
       margin-bottom: 15px;
     }
 
-    .popup button {
-      background-color: #0056b3;
-      border: none;
-      color: white;
+    .popup .button {
       padding: 10px 20px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin-top: 10px;
-      cursor: pointer;
-      border-radius: 5px;
+      margin: 10px;
     }
 
-    .popup button:hover {
-      background-color: #0056b3;
-      /* Darker blue on hover */
+    .popup .confirm {
+      background-color: green;
     }
 
-    /* Address form styling */
+    .popup .cancel {
+      background-color: red;
+    }
+
     .address-form {
       margin-top: 20px;
       padding: 20px;
       border-top: 1px solid #ddd;
       text-align: left;
+      display: none;
+      /* Initially hidden */
     }
 
     .address-form h2 {
@@ -196,7 +169,7 @@
       margin-right: 10px;
     }
 
-    .address-form button[type="submit"] {
+    .address-form button[type="button"] {
       background-color: #4CAF50;
       color: white;
       padding: 10px 20px;
@@ -204,9 +177,10 @@
       border-radius: 5px;
       cursor: pointer;
       font-size: 16px;
+      transition: background-color 0.3s;
     }
 
-    .address-form button[type="submit"]:hover {
+    .address-form button[type="button"]:hover {
       background-color: #45a049;
     }
   </style>
@@ -222,12 +196,12 @@
     </div>
 
     <div class="buttons">
-      <button class="button" id="confirmButton">เข้าร่วม</button>
+      <button class="button confirm" id="confirmButton">เข้าร่วม</button>
       <button class="button cancel" id="cancelButton">ไม่เข้าร่วม</button>
     </div>
-    <a href="home.html" class="back-button">Back to Home</a>
+    <a href="home.html" class="back-button">กลับไปที่หน้าหลัก</a>
 
-    <div class="address-form" id="addressForm" style="display: none;">
+    <div class="address-form" id="addressForm">
       <h2>กรุณาเลือกวิธีรับใบรับปริญญา</h2>
       <label>
         <input type="radio" name="deliveryOption" value="delivery" id="deliveryOption"> จัดส่งถึงที่อยู่
@@ -236,114 +210,134 @@
         <input type="radio" name="deliveryOption" value="pickup" id="pickupOption"> มารับด้วยตนเอง
       </label>
       <div id="addressFields" style="display: none;">
-        <label for="address">ที่อยู่:</label>
-        <input type="text" id="address" name="address">
-        <label for="city">เมือง:</label>
-        <input type="text" id="city" name="city">
-        <label for="zip">รหัสไปรษณีย์:</label>
-        <input type="text" id="zip" name="zip">
+        <label for="address" id="addressLabel">ที่อยู่:</label>
+        <input type="text" id="addressInput" name="address">
+        <label for="city" id="cityLabel">จังหวัด/เมือง:</label>
+        <input type="text" id="cityInput" name="city">
+        <label for="zip" id="zipLabel">รหัสไปรษณีย์:</label>
+        <input type="text" id="zipInput" name="zip">
       </div>
-      <button type="submit" id="submitAddressButton">ยืนยัน</button>
+      <button type="button" id="submitAddressButton">ยืนยัน</button>
     </div>
-  </div>
 
-  <!-- Custom Popup -->
-  <div class="popup" id="cancelConfirmationPopup">
-    <p>คุณแน่ใจว่าต้องการยกเลิกการเข้าร่วม?</p>
-    <button id="cancelYesButton">ใช่</button>
-    <button id="cancelNoButton">ไม่</button>
-  </div>
+    <script>
+      // Function to create popup dialog
+      function createPopupDialog(message, confirmCallback) {
+        var popup = document.createElement("div");
+        popup.className = "popup";
+        var popupContent = document.createElement("div");
+        popupContent.className = "popup-content";
 
-  <script>
-    document.getElementById("confirmButton").addEventListener("click", function () {
-      // Create a custom confirmation dialog
-      var confirmDialog = document.createElement("div");
-      confirmDialog.style.position = "fixed";
-      confirmDialog.style.top = "0";
-      confirmDialog.style.left = "0";
-      confirmDialog.style.width = "100%";
-      confirmDialog.style.height = "100%";
-      confirmDialog.style.backgroundColor = "rgba(0,0,0,0.5)";
-      confirmDialog.style.display = "flex";
-      confirmDialog.style.justifyContent = "center";
-      confirmDialog.style.alignItems = "center";
-      confirmDialog.style.zIndex = "1000";
+        var messageElement = document.createElement("p");
+        messageElement.textContent = message;
+        popupContent.appendChild(messageElement);
 
-      var confirmBox = document.createElement("div");
-      confirmBox.style.backgroundColor = "white";
-      confirmBox.style.padding = "20px";
-      confirmBox.style.borderRadius = "10px";
-      confirmBox.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
-      confirmBox.style.textAlign = "center";
+        var confirmButton = document.createElement("button");
+        confirmButton.textContent = "ใช่";
+        confirmButton.className = "button confirm";
+        confirmButton.style.marginRight = "10px";
+        confirmButton.addEventListener("click", function () {
+          document.body.removeChild(popup);
+          if (confirmCallback) {
+            confirmCallback();
+          }
+        });
+        popupContent.appendChild(confirmButton);
 
-      var message = document.createElement("p");
-      message.textContent = "คุณแน่ใจหรือไม่ที่จะยืนยันการเข้าร่วม?";
-      confirmBox.appendChild(message);
+        var cancelButton = document.createElement("button");
+        cancelButton.textContent = "ไม่";
+        cancelButton.className = "button cancel";
+        cancelButton.addEventListener("click", function () {
+          document.body.removeChild(popup);
+        });
+        popupContent.appendChild(cancelButton);
 
-      var yesButton = document.createElement("button");
-      yesButton.textContent = "ใช่";
-      yesButton.style.backgroundColor = "green";
-      yesButton.style.color = "white";
-      yesButton.style.border = "none";
-      yesButton.style.padding = "10px 20px";
-      yesButton.style.borderRadius = "5px";
-      yesButton.style.cursor = "pointer";
-      yesButton.style.marginRight = "10px";
-      yesButton.addEventListener("click", function () {
-        document.body.removeChild(confirmDialog);
-        alert("คุณได้ทำการยืนยันแล้ว!");
-        // Perform further actions if confirmed
+        popup.appendChild(popupContent);
+        document.body.appendChild(popup);
+      }
+
+      // Event listeners
+      document.getElementById("confirmButton").addEventListener("click", function () {
+        createPopupDialog("คุณแน่ใจหรือไม่ที่จะยืนยันการเข้าร่วมงาน?", function () {
+          alert("คุณได้ทำการยืนยันแล้ว!");
+          window.location.href = "home.html";
+        });
+      });
+
+      document.getElementById("cancelButton").addEventListener("click", function () {
+        createPopupDialog("คุณแน่ใจว่าต้องการยกเลิกการเข้าร่วมงาน?", function () {
+          document.getElementById("addressForm").style.display = "block";
+        });
+      });
+
+      // document.getElementById("deliveryOption").addEventListener("change", function () {
+      //   var addressFields = document.getElementById("addressFields");
+      //   addressFields.style.display = this.checked ? "block" : "none";
+      // });
+
+      // document.getElementById("submitAddressButton").addEventListener("click", function () {
+      //   var deliveryOption = document.querySelector('input[name="deliveryOption"]:checked');
+      //   if (!deliveryOption) {
+      //     alert("กรุณาเลือกวิธีรับใบรับปริญญา");
+      //     return;
+      //   }
+
+      //   if (deliveryOption.value === "delivery") {
+      //     var address = document.getElementById("addressInput").value.trim();
+      //     var city = document.getElementById("cityInput").value.trim();
+      //     var zip = document.getElementById("zipInput").value.trim();
+
+      //     if (address === "" || city === "" || zip === "") {
+      //       alert("กรุณากรอกข้อมูลที่อยู่ให้ครบถ้วน");
+      //       return;
+      //     }
+      //   }
+
+      //   alert("บันทึกข้อมูลเรียบร้อยแล้ว");
+      //   window.location.href = "home.html";
+      // });
+
+      
+      // Event listener for radio button change
+      document.querySelectorAll('input[type="radio"][name="deliveryOption"]').forEach(function (radio) {
+        radio.addEventListener('change', function () {
+          if (this.value === "delivery") {
+            document.getElementById("addressFields").style.display = "block";
+            document.getElementById("addressLabel").style.display = "block";
+            document.getElementById("cityLabel").style.display = "block";
+            document.getElementById("zipLabel").style.display = "block";
+          } else {
+            document.getElementById("addressFields").style.display = "none";
+            document.getElementById("addressLabel").style.display = "none";
+            document.getElementById("cityLabel").style.display = "none";
+            document.getElementById("zipLabel").style.display = "none";
+          }
+        });
+      });
+
+      // Event listener for submit button
+      document.getElementById("submitAddressButton").addEventListener("click", function () {
+        var deliveryOption = document.querySelector('input[name="deliveryOption"]:checked');
+        if (!deliveryOption) {
+          alert("กรุณาเลือกวิธีรับใบรับปริญญา");
+          return;
+        }
+
+        if (deliveryOption.value === "delivery") {
+          var address = document.getElementById("addressInput").value.trim();
+          var city = document.getElementById("cityInput").value.trim();
+          var zip = document.getElementById("zipInput").value.trim();
+
+          if (address === "" || city === "" || zip === "") {
+            alert("กรุณากรอกข้อมูลที่อยู่ให้ครบถ้วน");
+            return;
+          }
+        }
+
+        alert("บันทึกข้อมูลเรียบร้อยแล้ว");
         window.location.href = "home.html";
-
       });
-      confirmBox.appendChild(yesButton);
-
-      var noButton = document.createElement("button");
-      noButton.textContent = "ไม่";
-      noButton.style.backgroundColor = "red";
-      noButton.style.color = "white";
-      noButton.style.border = "none";
-      noButton.style.padding = "10px 20px";
-      noButton.style.borderRadius = "5px";
-      noButton.style.cursor = "pointer";
-      noButton.addEventListener("click", function () {
-        document.body.removeChild(confirmDialog);
-      });
-      confirmBox.appendChild(noButton);
-
-      confirmDialog.appendChild(confirmBox);
-      document.body.appendChild(confirmDialog);
-    });
-
-    document.getElementById("cancelButton").addEventListener("click", function () {
-      document.getElementById("cancelConfirmationPopup").style.display = "block";
-    });
-
-    document.getElementById("cancelYesButton").addEventListener("click", function () {
-      document.getElementById("cancelConfirmationPopup").style.display = "none";
-      document.getElementById("addressForm").style.display = "block";
-    });
-
-    document.getElementById("cancelNoButton").addEventListener("click", function () {
-      document.getElementById("cancelConfirmationPopup").style.display = "none";
-    });
-
-    document.getElementById("deliveryOption").addEventListener("change", function () {
-      document.getElementById("addressFields").style.display = "block";
-    });
-
-    document.getElementById("pickupOption").addEventListener("change", function () {
-      document.getElementById("addressFields").style.display = "none";
-    });
-    
-    document.getElementById("submitAddressButton").addEventListener("click", function () {
-      // Simulate saving data (could be an AJAX call to a server)
-      alert("บันทึกข้อมูลเรียบร้อยแล้ว");
-
-      // Redirect to home.html
-      window.location.href = "home.html";
-    });
-  </script>
+    </script>
 </body>
 
 </html>
