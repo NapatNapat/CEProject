@@ -183,41 +183,49 @@
     .address-form button[type="button"]:hover {
       background-color: #45a049;
     }
+
+    .large-label {
+            font-size: 24px; /* กำหนดขนาดฟอนต์ */
+            padding: 10px; /* กำหนดการเว้นระยะห่างด้านในของ label */
+            background-color: #f0f0f0; /* กำหนดสีพื้นหลัง */
+            border: 1px solid #ccc; /* กำหนดเส้นขอบ */
+            border-radius: 5px; /* กำหนดความโค้งของมุม */
+        }
   </style>
 </head>
 
 <body>
   <div class="container">
     <div class="header">
-      <h1>คุณจะเข้าร่วมงานรับปริญญาไหม</h1>
+      <h1>Will you attend the graduation ceremony?</h1>
       <div class="question">
-        กรุณายืนยันการเข้าร่วมงานรับปริญญาของคุณ
+      Please confirm your attendance at the graduation event.
       </div>
     </div>
 
     <div class="buttons">
-      <button class="button confirm" id="confirmButton">เข้าร่วม</button>
-      <button class="button cancel" id="cancelButton">ไม่เข้าร่วม</button>
+      <button class="button confirm" id="confirmButton">Confirm</button>
+      <button class="button cancel" id="cancelButton">Cancel</button>
     </div>
-    <a href="home.html" class="back-button">กลับไปที่หน้าหลัก</a>
+    <a href="home.html" class="back-button">Return to home page</a>
 
     <div class="address-form" id="addressForm">
-      <h2>กรุณาเลือกวิธีรับใบรับปริญญา</h2>
+      <h2>Please choose a method to receive your graduation certificate.</h2>
       <label>
-        <input type="radio" name="deliveryOption" value="delivery" id="deliveryOption"> จัดส่งถึงที่อยู่
+        <input type="radio" name="deliveryOption" value="delivery" id="deliveryOption">By delivery
       </label>
       <label>
-        <input type="radio" name="deliveryOption" value="pickup" id="pickupOption"> มารับด้วยตนเอง
+        <input type="radio" name="deliveryOption" value="pickup" id="pickupOption">By yourself
       </label>
       <div id="addressFields" style="display: none;">
-        <label for="address" id="addressLabel">ที่อยู่:</label>
+        <label for="address" id="addressLabel" class="large-label">Address:</label>
         <input type="text" id="addressInput" name="address">
-        <label for="city" id="cityLabel">จังหวัด/เมือง:</label>
+        <!-- <label for="city" id="cityLabel">จังหวัด/เมือง:</label>
         <input type="text" id="cityInput" name="city">
-        <label for="zip" id="zipLabel">รหัสไปรษณีย์:</label>
-        <input type="text" id="zipInput" name="zip">
+        <label for="zip" id="zipLabel">Postal code:</label>
+        <input type="text" id="zipInput" name="zip"> -->
       </div>
-      <button type="button" id="submitAddressButton">ยืนยัน</button>
+      <button type="button" id="submitAddressButton">Confirm</button>
     </div>
 
     <script>
@@ -233,7 +241,7 @@
         popupContent.appendChild(messageElement);
 
         var confirmButton = document.createElement("button");
-        confirmButton.textContent = "ใช่";
+        confirmButton.textContent = "Yes";
         confirmButton.className = "button confirm";
         confirmButton.style.marginRight = "10px";
         confirmButton.addEventListener("click", function () {
@@ -245,7 +253,7 @@
         popupContent.appendChild(confirmButton);
 
         var cancelButton = document.createElement("button");
-        cancelButton.textContent = "ไม่";
+        cancelButton.textContent = "No";
         cancelButton.className = "button cancel";
         cancelButton.addEventListener("click", function () {
           document.body.removeChild(popup);
@@ -258,14 +266,14 @@
 
       // Event listeners
       document.getElementById("confirmButton").addEventListener("click", function () {
-        createPopupDialog("คุณแน่ใจหรือไม่ที่จะยืนยันการเข้าร่วมงาน?", function () {
+        createPopupDialog("Are you sure to confirm your attendance?", function () {
           //alert("คุณได้ทำการยืนยันแล้ว!");
           window.location.href = "input.html";
         });
       });
 
       document.getElementById("cancelButton").addEventListener("click", function () {
-        createPopupDialog("คุณแน่ใจว่าต้องการยกเลิกการเข้าร่วมงาน?", function () {
+        createPopupDialog("Are you sure you want to cancel your event?", function () {
           document.getElementById("addressForm").style.display = "block";
         });
       });
