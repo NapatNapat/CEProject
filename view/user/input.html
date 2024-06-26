@@ -96,16 +96,28 @@
         .file-inputs {
             display: flex;
             flex-wrap: wrap;
-            gap: 5px;
-            /* ระยะห่างระหว่างแต่ละช่อง input */
+            gap: 10px;
+            margin-bottom: 20px;
+            /* เพิ่มระยะห่างระหว่างช่อง input กับปุ่ม */
         }
 
-        @media (max-width: 600px) {
-            .file-inputs {
-                flex-direction: column;
-                gap: 20px;
-                /* เพิ่มระยะห่างเมื่ออยู่ในแนวตั้ง */
-            }
+        .file-input {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .file-input img {
+            max-width: 100px;
+            max-height: 100px;
+            margin-top: 10px;
+        }
+
+        .form-buttons {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            /* หรือปรับขนาดตามต้องการ */
         }
     </style>
 </head>
@@ -168,6 +180,7 @@
                 </section>
 
                 <form action="/upload" method="post" enctype="multipart/form-data">
+                    <h3>Add Your Picture</h3>
                     <div class="file-inputs">
                         <div class="file-input">
                             <input type="file" name="image1" accept="image/*" onchange="previewImage(event, 0)">
@@ -182,11 +195,15 @@
                             <img id="preview-2" src="#" alt="Preview" style="display:none;">
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-success">Submit</button>
+                    <div class="form-buttons">
+                        <button type="button" onclick="goBack()" class="btn btn-secondary">Back</button>
+                        <button type="submit" onclick="goOn()" class="btn btn-success">Submit</button>
+                    </div>
                 </form>
         </div>
 
         <script>
+            // ใช้ใน Ad-Picture
             function previewImage(event, index) {
                 const input = event.target;
                 const reader = new FileReader();
@@ -200,6 +217,15 @@
                 }
             }
 
+            function goBack() {
+                window.location.href = "home.html";
+            }
+
+            function goOn() {
+                window.location.href = "showInformstion.html";
+            }
+
+            // ใช้ใน Dropdown
             const dropdown2Data = {
                 bachelor: ["School of Agro-Industry", "School of Cosmetic Science", "School of Dentistry", "School of Health Science", "School of Information Technology",
                     "School of Integrative Medicine", "School of Law", "School of Liberal Arts", "School of Management", "School of Medicine", "School of Science", "School of Social Innovation"],
