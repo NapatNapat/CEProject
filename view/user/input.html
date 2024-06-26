@@ -92,6 +92,21 @@
             padding: 20px 0;
             text-align: center;
         }
+
+        .file-inputs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            /* ระยะห่างระหว่างแต่ละช่อง input */
+        }
+
+        @media (max-width: 600px) {
+            .file-inputs {
+                flex-direction: column;
+                gap: 20px;
+                /* เพิ่มระยะห่างเมื่ออยู่ในแนวตั้ง */
+            }
+        }
     </style>
 </head>
 
@@ -114,6 +129,7 @@
             <form action="submit.php" method="post">
                 <section id="personal-info">
                     <h2>Personal information</h2>
+                    <p></p>
                     <label for="name">Student ID:</label>
                     <input class="rounded-input" type="text" id="studentID" name="StudentID" required>
 
@@ -132,8 +148,8 @@
                     <label for="degree">Degree:</label>
                     <select class="rounded-select" id="degree" onchange="filterDropdown2()">
                         <option value="">Select an option</option>
-                        <option value="bachelor">Bachelor’s Degree</option>
-                        <option value="master">Master’s Degree</option>
+                        <option value="bachelor">Bachelor's Degree</option>
+                        <option value="master">Master's Degree</option>
                         <option value="doctoral">Doctoral Degree</option>
                         <option value="certificate">Certificate</option>
                     </select>
@@ -151,51 +167,38 @@
                     </select>
                 </section>
 
-                <section id="add-pic">
-                    <h2>Add your Picture</h2>
-                </section>
-                <div class="mt-3">
-                    <p>Picture 1</p>
-                    <input type="file" id="fileInput" accept="image/*">
-                    <div class="preview">
-                        <img id="previewImage" src="#" alt="Image Preview" style="display:none;">
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <div class="file-inputs">
+                        <div class="file-input">
+                            <input type="file" name="image1" accept="image/*" onchange="previewImage(event, 0)">
+                            <img id="preview-0" src="#" alt="Preview" style="display:none;">
+                        </div>
+                        <div class="file-input">
+                            <input type="file" name="image2" accept="image/*" onchange="previewImage(event, 1)">
+                            <img id="preview-1" src="#" alt="Preview" style="display:none;">
+                        </div>
+                        <div class="file-input">
+                            <input type="file" name="image3" accept="image/*" onchange="previewImage(event, 2)">
+                            <img id="preview-2" src="#" alt="Preview" style="display:none;">
+                        </div>
                     </div>
-                </div>
-                <div class="mt-3">
-                    <p>Picture 2</p>
-                    <input type="file" id="fileInput" accept="image/*">
-                    <div class="preview">
-                        <img id="previewImage" src="#" alt="Image Preview" style="display:none;">
-                    </div>
-                </div>
-                <div class="mt-3">
-                    <p>Picture 3</p>
-                    <input type="file" id="fileInput" accept="image/*">
-                    <div class="preview">
-                        <img id="previewImage" src="#" alt="Image Preview" style="display:none;">
-                    </div>
-                </div>
-
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </form>
         </div>
 
         <script>
-            const fileInput = document.getElementById('fileInput');
-            const previewImage = document.getElementById('previewImage');
-
-            fileInput.addEventListener('change', function (event) {
-                const file = event.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function (e) {
-                        previewImage.src = e.target.result;
-                        previewImage.style.display = 'block';
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    previewImage.style.display = 'none';
-                    previewImage.src = '#';
+            function previewImage(event, index) {
+                const input = event.target;
+                const reader = new FileReader();
+                reader.onload = function () {
+                    const imgElement = document.getElementById('preview-' + index);
+                    imgElement.src = reader.result;
+                    imgElement.style.display = 'block';
                 }
-            });
+                if (input.files && input.files[0]) {
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
 
             const dropdown2Data = {
                 bachelor: ["School of Agro-Industry", "School of Cosmetic Science", "School of Dentistry", "School of Health Science", "School of Information Technology",
