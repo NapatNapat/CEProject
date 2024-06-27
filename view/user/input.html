@@ -119,6 +119,8 @@
             width: 100%;
             /* หรือปรับขนาดตามต้องการ */
         }
+
+        
     </style>
 </head>
 
@@ -142,6 +144,11 @@
                 <section id="personal-info">
                     <h2>Personal information</h2>
                     <p></p>
+                    <label for=""></label>
+                    <input type="file" name="image3" accept="image/*" onchange="previewImage(event, 2)" class="text-center">
+                    <img id="preview-2" src="#" alt="Preview" style="display:none;">
+                    <p></p>
+
                     <label for="name">Student ID:</label>
                     <input class="rounded-input" type="text" id="studentID" name="StudentID" required>
 
@@ -183,14 +190,17 @@
                     <h3>Add Your Picture</h3>
                     <div class="file-inputs">
                         <div class="file-input">
+                            <p>Front Picture</p>
                             <input type="file" name="image1" accept="image/*" onchange="previewImage(event, 0)">
                             <img id="preview-0" src="#" alt="Preview" style="display:none;">
                         </div>
                         <div class="file-input">
+                            <p>Left Picture</p>
                             <input type="file" name="image2" accept="image/*" onchange="previewImage(event, 1)">
                             <img id="preview-1" src="#" alt="Preview" style="display:none;">
                         </div>
                         <div class="file-input">
+                            <p>Right Picture</p>
                             <input type="file" name="image3" accept="image/*" onchange="previewImage(event, 2)">
                             <img id="preview-2" src="#" alt="Preview" style="display:none;">
                         </div>

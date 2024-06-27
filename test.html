@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centered Image Input with Border and Preview</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .image-input-container {
+            text-align: center;
+            border: 2px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-input {
+            display: block;
+            margin: 0 auto 20px;
+        }
+
+        .image-preview {
+            max-width: 100%;
+            max-height: 300px;
+            display: none;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-input-container">
+        <input type="file" class="image-input" accept="image/*" onchange="previewImage(event)">
+        <img id="imagePreview" class="image-preview" alt="Image Preview">
+    </div>
+
+    <script>
+        function previewImage(event) {
+            const input = event.target;
+            const preview = document.getElementById('imagePreview');
+            
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                preview.src = '';
+                preview.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
