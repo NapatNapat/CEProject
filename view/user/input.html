@@ -120,22 +120,46 @@
             /* หรือปรับขนาดตามต้องการ */
         }
 
-        #upload-container {
-            margin-top: 20px;
+        .upload-container {
+            border: 2px solid #ccc;
+            padding: 20px;
+            width: fit-content;
+            margin: auto;
+            display: inline-block;
+
+        }
+
+        .upload-container {
             border: 2px solid #ccc;
             padding: 10px;
             width: fit-content;
-            text-align: center;
-            
+            margin: auto;
+            display: block;
         }
+
+        .grouped-containers {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
         img {
             max-width: 100%;
             height: auto;
             cursor: pointer;
         }
-        #error-message {
+
+        .error-message {
             color: red;
             margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .grouped-containers {
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
 </head>
@@ -158,15 +182,15 @@
         <div class="container">
             <form action="submit.php" method="post">
                 <section id="personal-info">
-                    <h2>Personal information</h2>
-                    <p></p>
-                    <div id="upload-container">
-                        <input type="file" id="fileInput" accept="image/*">
-                        <div id="preview"></div>
-                        <div id="error-message"></div>
+                    <h2 class="mb-4">Personal information</h2>
+                    <div id="upload-container1" class="upload-container">
+                        <h5>Upload Your Graduation Image</h5>
+                        <input type="file" id="fileInput1" accept="image/*">
+                        <div id="preview1"></div>
+                        <div id="error-message1" class="error-message"></div>
                     </div>
 
-                    <label for="name">Student ID:</label>
+                    <label for="name" class="mt-4">Student ID:</label>
                     <input class="rounded-input" type="text" id="studentID" name="StudentID" required>
 
                     <label for="name">Name:</label>
@@ -203,54 +227,136 @@
                     </select>
                 </section>
 
-                <form action="/upload" method="post" enctype="multipart/form-data">
-                    <h3>Add Your Picture</h3>
-                    <div class="file-inputs">
-                        <div class="file-input">
-                            <p>Front Picture</p>
-                            <input type="file" name="image1" accept="image/*" onchange="previewImage(event, 0)">
-                            <img id="preview-0" src="#" alt="Preview" style="display:none;">
-                        </div>
-                        <div class="file-input">
-                            <p>Left Picture</p>
-                            <input type="file" name="image2" accept="image/*" onchange="previewImage(event, 1)">
-                            <img id="preview-1" src="#" alt="Preview" style="display:none;">
-                        </div>
-                        <div class="file-input">
-                            <p>Right Picture</p>
-                            <input type="file" name="image3" accept="image/*" onchange="previewImage(event, 2)">
-                            <img id="preview-2" src="#" alt="Preview" style="display:none;">
-                        </div>
+                <h2 class="mb-4">Add Your Image</h2>
+                <div class="grouped-containers mt-3">
+                    <div id="upload-container2" class="upload-container">
+                        <h5>Upload Image 2</h5>
+                        <input type="file" id="fileInput2" accept="image/*">
+                        <div id="preview2"></div>
+                        <div id="error-message2" class="error-message"></div>
                     </div>
-                    <div class="form-buttons">
-                        <button type="button" onclick="goBack()" class="btn btn-secondary">Back</button>
-                        <button type="submit" onclick="goOn()" class="btn btn-success">Submit</button>
+
+                    <div id="upload-container3" class="upload-container">
+                        <h5>Upload Image 3</h5>
+                        <input type="file" id="fileInput3" accept="image/*">
+                        <div id="preview3"></div>
+                        <div id="error-message3" class="error-message"></div>
                     </div>
-                </form>
+
+                    <div id="upload-container4" class="upload-container">
+                        <h5>Upload Image 4</h5>
+                        <input type="file" id="fileInput4" accept="image/*">
+                        <div id="preview4"></div>
+                        <div id="error-message4" class="error-message"></div>
+                    </div>
+                </div>
+                <div class="form-buttons mt-4">
+                    <button type="button" onclick="goBack()" class="btn btn-secondary">Back</button>
+                    <button type="submit" onclick="goOn()" class="btn btn-success">Submit</button>
+                </div>
+            </form>
         </div>
 
         <script>
-            // ใช้ใน Ad-Picture
-            function previewImage(event, index) {
-                const input = event.target;
-                const reader = new FileReader();
-                reader.onload = function () {
-                    const imgElement = document.getElementById('preview-' + index);
-                    imgElement.src = reader.result;
-                    imgElement.style.display = 'block';
-                }
-                if (input.files && input.files[0]) {
-                    reader.readAsDataURL(input.files[0]);
+            // ใช้ใน Ad-Picture, ใช้ในการ input รูปภาพ
+            const fileInput = document.getElementById('fileInput');
+            const preview = document.getElementById('preview');
+            const uploadContainer = document.getElementById('upload-container');
+            const errorMessage = document.getElementById('error-message');
+            const maxWidth = 1024; // กำหนดขนาดกว้างสุด
+            const maxHeight = 768; // กำหนดขนาดสูงสุด
+
+            function handleFileChange(event, previewId, errorMessageId, fileInputId) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        const img = new Image();
+                        img.src = e.target.result;
+                        img.onload = function () {
+                            if (img.width > maxWidth || img.height > maxHeight) {
+                                document.getElementById(errorMessageId).textContent = `The image size exceeds the limit of ${maxWidth}px by ${maxHeight}px.`;
+                                document.getElementById(previewId).innerHTML = '';
+                                document.getElementById(fileInputId).value = '';
+                            } else {
+                                document.getElementById(errorMessageId).textContent = '';
+                                document.getElementById(previewId).innerHTML = `<img src="${e.target.result}" alt="Image Preview">`;
+
+                                // ซ่อนช่องอัพโหลดภาพหลังจากแสดงภาพตัวอย่าง
+                                document.getElementById(fileInputId).style.display = 'none';
+                            }
+                        };
+                    };
+                    reader.readAsDataURL(file);
                 }
             }
 
+            function handleClick(uploadContainerId, fileInputId, previewId) {
+                document.getElementById(uploadContainerId).addEventListener('click', function () {
+                    if (document.getElementById(previewId).innerHTML !== '') {
+                        document.getElementById(fileInputId).click();
+                    }
+                });
+            }
+
+            function handleFileInputClick(fileInputId) {
+                document.getElementById(fileInputId).addEventListener('click', function (event) {
+                    // ล้างค่า input ก่อนเปิดเพื่อให้อัพโหลดไฟล์เดิมได้
+                    document.getElementById(fileInputId).value = '';
+                });
+            }
+
+            document.getElementById('fileInput1').addEventListener('change', function (event) {
+                handleFileChange(event, 'preview1', 'error-message1', 'fileInput1');
+            });
+
+            document.getElementById('fileInput2').addEventListener('change', function (event) {
+                handleFileChange(event, 'preview2', 'error-message2', 'fileInput2');
+            });
+
+            document.getElementById('fileInput3').addEventListener('change', function (event) {
+                handleFileChange(event, 'preview3', 'error-message3', 'fileInput3');
+            });
+
+            document.getElementById('fileInput4').addEventListener('change', function (event) {
+                handleFileChange(event, 'preview4', 'error-message4', 'fileInput4');
+            });
+
+            handleClick('upload-container1', 'fileInput1', 'preview1');
+            handleClick('upload-container2', 'fileInput2', 'preview2');
+            handleClick('upload-container3', 'fileInput3', 'preview3');
+            handleClick('upload-container4', 'fileInput4', 'preview4');
+
+            handleFileInputClick('fileInput1');
+            handleFileInputClick('fileInput2');
+            handleFileInputClick('fileInput3');
+            handleFileInputClick('fileInput4');
+
             // ใช้ในการเปลี่ยนหน้า
+            function checkInputs() {
+                const inputs = ['fileInput1', 'fileInput2', 'fileInput3', 'fileInput4'];
+                let allFilled = true;
+
+                for (const input of inputs) {
+                    if (!document.getElementById(input).files.length) {
+                        allFilled = false;
+                        break;
+                    }
+                }
+
+                return allFilled;
+            }
+
             function goBack() {
                 window.location.href = "home.html";
             }
 
             function goOn() {
-                window.location.href = "showInformstion.html";
+                if (checkInputs()) {
+                    window.location.href = "showInformation.html";
+                } else {
+                    alert("Please upload images in all fields.");
+                }
             }
 
             // ใช้ใน Dropdown
@@ -334,50 +440,6 @@
             // Initialize dropdowns with default data
             filterDropdown2();
             filterDropdown3();
-
-            const fileInput = document.getElementById('fileInput');
-        const preview = document.getElementById('preview');
-        const uploadContainer = document.getElementById('upload-container');
-        const errorMessage = document.getElementById('error-message');
-        const maxWidth = 1024; // กำหนดขนาดกว้างสุด
-        const maxHeight = 768; // กำหนดขนาดสูงสุด
-
-        fileInput.addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const img = new Image();
-                    img.src = e.target.result;
-                    img.onload = function() {
-                        if (img.width > maxWidth || img.height > maxHeight) {
-                            errorMessage.textContent = `The image size exceeds the limit of ${maxWidth}px by ${maxHeight}px.`;
-                            preview.innerHTML = '';
-                            fileInput.value = '';
-                        } else {
-                            errorMessage.textContent = '';
-                            preview.innerHTML = `<img src="${e.target.result}" alt="Image Preview">`;
-
-                            // ซ่อนช่องอัพโหลดภาพหลังจากแสดงภาพตัวอย่าง
-                            fileInput.style.display = 'none';
-                        }
-                    };
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        uploadContainer.addEventListener('click', function() {
-            if (preview.innerHTML !== '') {
-                fileInput.click();
-            }
-        });
-
-        fileInput.addEventListener('click', function(event) {
-            // ล้างค่า input ก่อนเปิดเพื่อให้อัพโหลดไฟล์เดิมได้
-            fileInput.value = '';
-        });
-
         </script>
 </body>
 
