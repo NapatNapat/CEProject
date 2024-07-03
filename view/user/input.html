@@ -185,6 +185,7 @@
         .popup button {
             margin-top: 20px;
             padding: 10px 20px;
+            /*border-radius: 10px;*/
         }
     </style>
 </head>
@@ -255,26 +256,27 @@
                 <h2 class="mb-4">Add Your Image</h2>
                 <div class="grouped-containers mt-3">
                     <div id="upload-container2" class="upload-container">
-                        <h5>Upload Image 2</h5>
+                        <h5>Straight</h5>
                         <input type="file" id="fileInput2" accept="image/*">
                         <div id="preview2"></div>
                         <div id="error-message2" class="error-message"></div>
                     </div>
 
                     <div id="upload-container3" class="upload-container">
-                        <h5>Upload Image 3</h5>
+                        <h5>Left side</h5>
                         <input type="file" id="fileInput3" accept="image/*">
                         <div id="preview3"></div>
                         <div id="error-message3" class="error-message"></div>
                     </div>
 
                     <div id="upload-container4" class="upload-container">
-                        <h5>Upload Image 4</h5>
+                        <h5>Right side</h5>
                         <input type="file" id="fileInput4" accept="image/*">
                         <div id="preview4"></div>
                         <div id="error-message4" class="error-message"></div>
                     </div>
                 </div>
+
                 <div class="form-buttons mt-4">
                     <button type="button" onclick="goBack()" class="btn btn-secondary">Back</button>
                     <button type="submit" onclick="goOn()" class="btn btn-success">Submit</button>
@@ -282,8 +284,8 @@
 
                 <div id="popupOverlay" class="popup-overlay">
                     <div class="popup">
-                        <p>Please upload images in all fields.</p>
-                        <button onclick="closePopup()">Close</button>
+                        <h5>Please upload images in all fields.</h5>
+                        <button onclick="closePopup()" class="btn btn-danger">Close</button>
                     </div>
                 </div>
             </form>
