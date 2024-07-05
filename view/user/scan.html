@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Scan</title>
+</head>
+<body>
+    <h1>Face Scan</h1>
+    <video id="video" width="640" height="480" autoplay></video>
+    <button onclick="scanFace()">Scan Face</button>
+
+    <script>
+        function startVideo() {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    const video = document.getElementById('video');
+                    video.srcObject = stream;
+                })
+                .catch(err => {
+                    console.error('Error accessing the camera: ', err);
+                });
+        }
+
+        function scanFace() {
+            const video = document.getElementById('video');
+            const canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            const context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            const scannedImage = canvas.toDataURL('image/png');
+            const uploadedImage = localStorage.getItem('uploadedImage');
+
+            // Here, you would send both images to your face recognition API for comparison
+            // For example:
+            // compareFaces(uploadedImage, scannedImage).then(result => {
+            //     if (result.match) {
+            //         alert('Faces match!');
+            //     } else {
+            //         alert('Faces do not match.');
+            //     }
+            // });
+
+            // Placeholder alert
+            alert('Scanned face image captured.');
+        }
+
+        window.onload = startVideo;
+    </script>
+</body>
+</html>
