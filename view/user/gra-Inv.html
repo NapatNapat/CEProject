@@ -244,7 +244,7 @@
       </div> -->
       </div>
       <div class="pickup-date" id="pickupDate">
-        <label for="pickupDateInput">เลือกวันที่:</label>
+        <label for="pickupDateInput">Choose a date:</label>
         <input type="date" id="pickupDateInput" name="pickupDate">
       </div>
       <button type="button" id="submitAddressButton">Confirm</button>
@@ -321,13 +321,14 @@
           return;
         }
 
+        //for delivery
         if (deliveryOption.value === "delivery") {
           var address = document.getElementById("addressInput").value.trim();
           // var city = document.getElementById("cityInput").value.trim();
           // var zip = document.getElementById("zipInput").value.trim();
 
           if (address === "") {
-            alert("กรุณากรอกข้อมูลที่อยู่ให้ครบถ้วน");
+            alert("Please fill in your complete address.");
             return;
           }
           // if (address === "" || city === "" || zip === "") {
@@ -335,6 +336,9 @@
           //   return;
           // }
         }
+
+        //for yourself
+        
 
         //alert("บันทึกข้อมูลเรียบร้อยแล้ว");
         window.location.href = "home.html";
