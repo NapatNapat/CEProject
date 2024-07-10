@@ -236,13 +236,17 @@
       <label>
         <input type="radio" name="deliveryOption" value="pickup" id="pickupOption"> By yourself
       </label>
+
+      <!--by delivery-->
       <div id="addressFields" style="display: none;">
         <label for="address" id="addressLabel">Address:</label>
         <input type="text" id="addressInput" name="address" class="large-input">
+       </div>
         <!-- </div>
       <div id="addressFields" style="display: none;">
       </div> -->
-      </div>
+     
+      <!--by yourself-->
       <div class="pickup-date" id="pickupDate">
         <label for="pickupDateInput">Choose a date:</label>
         <input type="date" id="pickupDateInput" name="pickupDate">
@@ -343,6 +347,33 @@
         //alert("บันทึกข้อมูลเรียบร้อยแล้ว");
         window.location.href = "home.html";
       });
+
+      function submitAddressButton() {
+      var dateInput = document.getElementById("pickupDateInput").value;
+      if (dateInput === "") {
+        alert("Please select a date before proceeding.");
+        return;
+      }
+
+      var selectedDate = new Date(dateInput);
+      var today = new Date();
+      today.setHours(0, 0, 0, 0); // Set time to 00:00:00 for comparison
+
+      if (selectedDate < today) {
+        alert("You cannot select a past date.");
+        return;
+      }
+
+      var dayOfWeek = selectedDate.getDay();
+      if (dayOfWeek === 0 || dayOfWeek === 6) {
+        alert("You cannot select a Saturday or Sunday.");
+        return;
+      }
+
+      // Continue to the next page or perform another action
+      alert("Date selected. Proceeding to the next page...");
+      // window.location.href = "nextPage.html"; // Uncomment this line to redirect to the next page
+    }
     </script>
 </body>
 

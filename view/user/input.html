@@ -251,6 +251,50 @@
                         <option value="">Select an option</option>
                         <!-- Options will be populated dynamically -->
                     </select>
+                    <!-- ความต้องการพิเศษ -->
+                    <div>
+                        <label for="firstDropdown">Do you have special requirements?:</label>
+                        <select class="rounded-select" id="firstDropdown" onchange="onFirstDropdownChange()">
+                            <option value="">Select an option</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+
+                    <div id="secondDropdownDiv" style="display:none;">
+                        <label for="secondDropdown">What is it?</label>
+                        <select class="rounded-select" id="secondDropdown" onchange="onSecondDropdownChange()">
+                            <option value="">Select an option</option>
+                            <option value="rank">Military rank</option>
+                            <option value="preg">Pregnancy</option>
+                        </select>
+                    </div>
+
+                    <div id="thirdDropdownDiv" style="display:none;">
+                        <label for="thirdDropdown">Appointment of military rank:</label>
+                        <select class="rounded-select" id="thirdDropdown">
+                            <option value="">Select an option</option>
+                            <option value="optionB">จ่าสิบเอก (จ.ส.อ.)</option>
+                            <option value="optionB">พันจ่าเอก (พ.จ.อ.)</option>
+                            <option value="optionB">พันจ่าอากาศเอก (พ.อ.อ.)</option>
+                            <option value="optionA">(ว่าที่) ร้อยตรี (ร.ต.)</option>
+                            <option value="optionB">(ว่าที่) เรือตรี (ร.ต.)</option>
+                            <option value="optionB">(ว่าที่) เรืออากาศตรี (ร.ต.)</option>
+                            <option value="optionB">(ว่าที่) พันเอก (พ.อ.)</option>
+                            <option value="optionB">(ว่าที่) นาวาเอก (น.อ.)</option>
+                            <option value="optionB">(ว่าที่) นาวาอากาศเอก (น.อ.)</option>
+                        </select>
+                    </div>
+
+                    <div id="fourthDropdownDiv" style="display:none;">
+                        <label for="fourthDropdown">Pregnancy period on the day of the graduation ceremony:</label>
+                        <select class="rounded-select" id="fourthDropdown">
+                            <option value="">Select an option</option>
+                            <option value="1st">1st trimester: 1 - 14 weeks of pregnancy</option>
+                            <option value="2nd">2nd trimester: 15 - 28 weeks of pregnancy</option>
+                            <option value="3rd">3rd trimester: 28 - 42 weeks of pregnancy</option>
+                        </select>
+                    </div>
                 </section>
 
                 <h2 class="mb-4">Add Your Image</h2>
@@ -287,7 +331,7 @@
                         <h5>Please upload images in all fields.</h5>
                         <button onclick="closePopup()" class="btn btn-danger">Close</button>
                     </div>
-                </div>               
+                </div>
             </form>
         </div>
 
@@ -401,7 +445,7 @@
                 document.getElementById('popupOverlay').style.display = 'none';
             }
 
-            // ใช้ใน Dropdown
+            // ใช้ใน Dropdown เลือก major
             const dropdown2Data = {
                 bachelor: ["School of Agro-Industry", "School of Cosmetic Science", "School of Dentistry", "School of Health Science", "School of Information Technology",
                     "School of Integrative Medicine", "School of Law", "School of Liberal Arts", "School of Management", "School of Medicine", "School of Science", "School of Social Innovation"],
@@ -482,6 +526,36 @@
             // Initialize dropdowns with default data
             filterDropdown2();
             filterDropdown3();
+
+            //ใช้ Dropdown ในการเลือกความต้องการพิเศษ
+            function showDropdown(id, show) {
+                document.getElementById(id).style.display = show ? 'block' : 'none';
+            }
+
+            function onFirstDropdownChange() {
+                const firstDropdown = document.getElementById('firstDropdown');
+                if (firstDropdown.value === 'yes') {
+                    showDropdown('secondDropdownDiv', true);
+                } else {
+                    showDropdown('secondDropdownDiv', false);
+                    showDropdown('thirdDropdownDiv', false);
+                    showDropdown('fourthDropdownDiv', false);
+                }
+            }
+
+            function onSecondDropdownChange() {
+                const secondDropdown = document.getElementById('secondDropdown');
+                if (secondDropdown.value === 'option1') {
+                    showDropdown('thirdDropdownDiv', true);
+                    showDropdown('fourthDropdownDiv', false);
+                } else if (secondDropdown.value === 'option2') {
+                    showDropdown('fourthDropdownDiv', true);
+                    showDropdown('thirdDropdownDiv', false);
+                } else {
+                    showDropdown('thirdDropdownDiv', false);
+                    showDropdown('fourthDropdownDiv', false);
+                }
+            }
         </script>
 </body>
 
