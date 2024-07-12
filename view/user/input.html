@@ -251,6 +251,7 @@
                         <option value="">Select an option</option>
                         <!-- Options will be populated dynamically -->
                     </select>
+                    
                     <!-- ความต้องการพิเศษ -->
                     <div>
                         <label for="firstDropdown">Do you have special requirements?:</label>
@@ -267,6 +268,7 @@
                             <option value="">Select an option</option>
                             <option value="rank">Military rank</option>
                             <option value="preg">Pregnancy</option>
+                            <option value="accid">Accident</option>
                         </select>
                     </div>
 
@@ -274,15 +276,15 @@
                         <label for="thirdDropdown">Appointment of military rank:</label>
                         <select class="rounded-select" id="thirdDropdown">
                             <option value="">Select an option</option>
-                            <option value="optionB">จ่าสิบเอก (จ.ส.อ.)</option>
-                            <option value="optionB">พันจ่าเอก (พ.จ.อ.)</option>
-                            <option value="optionB">พันจ่าอากาศเอก (พ.อ.อ.)</option>
-                            <option value="optionA">(ว่าที่) ร้อยตรี (ร.ต.)</option>
-                            <option value="optionB">(ว่าที่) เรือตรี (ร.ต.)</option>
-                            <option value="optionB">(ว่าที่) เรืออากาศตรี (ร.ต.)</option>
-                            <option value="optionB">(ว่าที่) พันเอก (พ.อ.)</option>
-                            <option value="optionB">(ว่าที่) นาวาเอก (น.อ.)</option>
-                            <option value="optionB">(ว่าที่) นาวาอากาศเอก (น.อ.)</option>
+                            <option value="">จ่าสิบเอก (จ.ส.อ.)</option>
+                            <option value="">พันจ่าเอก (พ.จ.อ.)</option>
+                            <option value="">พันจ่าอากาศเอก (พ.อ.อ.)</option>
+                            <option value="">(ว่าที่) ร้อยตรี (ร.ต.)</option>
+                            <option value="">(ว่าที่) เรือตรี (ร.ต.)</option>
+                            <option value="">(ว่าที่) เรืออากาศตรี (ร.ต.)</option>
+                            <option value="">(ว่าที่) พันเอก (พ.อ.)</option>
+                            <option value="">(ว่าที่) นาวาเอก (น.อ.)</option>
+                            <option value="">(ว่าที่) นาวาอากาศเอก (น.อ.)</option>
                         </select>
                     </div>
 
@@ -293,6 +295,15 @@
                             <option value="1st">1st trimester: 1 - 14 weeks of pregnancy</option>
                             <option value="2nd">2nd trimester: 15 - 28 weeks of pregnancy</option>
                             <option value="3rd">3rd trimester: 28 - 42 weeks of pregnancy</option>
+                        </select>
+                    </div>
+
+                    <div id="fifthDropdownDiv" style="display:none;">
+                        <label for="fifthDropdown">:</label>
+                        <select class="rounded-select" id="fifthDropdown">
+                            <option value="">Select an option</option>
+                            <option value=""></option>
+                            <option value=""></option>
                         </select>
                     </div>
                 </section>
@@ -540,20 +551,28 @@
                     showDropdown('secondDropdownDiv', false);
                     showDropdown('thirdDropdownDiv', false);
                     showDropdown('fourthDropdownDiv', false);
+                    showDropdown('fifthDropdownDiv', false);
                 }
             }
 
             function onSecondDropdownChange() {
                 const secondDropdown = document.getElementById('secondDropdown');
-                if (secondDropdown.value === 'option1') {
+                if (secondDropdown.value === 'rank') {
                     showDropdown('thirdDropdownDiv', true);
                     showDropdown('fourthDropdownDiv', false);
-                } else if (secondDropdown.value === 'option2') {
+                    showDropdown('fifthDropdownDiv', false);
+                } else if (secondDropdown.value === 'preg') {
                     showDropdown('fourthDropdownDiv', true);
                     showDropdown('thirdDropdownDiv', false);
+                    showDropdown('fifthDropdownDiv', false);
+                } else if (secondDropdown.value === 'accid') {
+                    showDropdown('fifthDropdownDuv', true);
+                    showDropdown('thirdDropdownDiv', false);
+                    showDropdown('fourthDropdownDiv', false);
                 } else {
                     showDropdown('thirdDropdownDiv', false);
                     showDropdown('fourthDropdownDiv', false);
+                    showDropdown('fifthDropdownDiv', false);
                 }
             }
         </script>
